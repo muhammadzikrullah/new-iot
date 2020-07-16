@@ -13,18 +13,18 @@ RUN export CONSUL_VERSION=0.7.0 \
     && mkdir /config
 
 # Install ContainerPilot
-# ENV CONTAINERPILOT_VERSION 3.1.3
-# RUN export CP_SHA1=0526af66371e1e54c840bcfbf42c4ded4124e026 \
-#     && curl -Lso /tmp/containerpilot.tar.gz \
-#          "https://github.com/joyent/containerpilot/releases/download/${CONTAINERPILOT_VERSION}/containerpilot-${CONTAINERPILOT_VERSION}.tar.gz" \
-#     && echo "${CP_SHA1}  /tmp/containerpilot.tar.gz" | sha1sum -c \
-#     && tar zxf /tmp/containerpilot.tar.gz -C /bin \
-#     && rm /tmp/containerpilot.tar.gz
+ENV CONTAINERPILOT_VERSION 3.1.3
+RUN export CP_SHA1=0526af66371e1e54c840bcfbf42c4ded4124e026 \
+    && curl -Lso /tmp/containerpilot.tar.gz \
+         "https://github.com/joyent/containerpilot/releases/download/${CONTAINERPILOT_VERSION}/containerpilot-${CONTAINERPILOT_VERSION}.tar.gz" \
+    && echo "${CP_SHA1}  /tmp/containerpilot.tar.gz" | sha1sum -c \
+    && tar zxf /tmp/containerpilot.tar.gz -C /bin \
+    && rm /tmp/containerpilot.tar.gz
 
-# # COPY ContainerPilot configuration
-# ENV CONTAINERPILOT_PATH=/etc/containerpilot.json5
-# COPY containerpilot.json5 ${CONTAINERPILOT_PATH}
-# ENV CONTAINERPILOT=${CONTAINERPILOT_PATH}
+# COPY ContainerPilot configuration
+ENV CONTAINERPILOT_PATH=/etc/containerpilot.json5
+COPY containerpilot.json5 ${CONTAINERPILOT_PATH}
+ENV CONTAINERPILOT=${CONTAINERPILOT_PATH}
 
 COPY memory.sh /bin/memory.sh
 RUN chmod 755 /bin/memory.sh
