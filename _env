@@ -1,0 +1,12 @@
+CONSUL=consul
+CONSUL_AGENT=1
+CONSUL=consul
+CONSUL_AGENT=1
+NATS_USER=ruser
+NATS_PASSWORD=password
+ADMIN_USER=root
+
+
+
+
+

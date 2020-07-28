@@ -3,7 +3,7 @@
   jobs: [
     {
       name: 'frontend',
-      port: {{.PORT}},
+      port: {{PORT}},
       exec: 'node /opt/app/',
       health: {
         exec: '/usr/bin/curl -o /dev/null --fail -s http://localhost:{{.PORT}}/check-it-out',

@@ -37,4 +37,4 @@ COPY lib/public /opt/app/lib/public
 RUN cd /opt/app && npm install
 
 
-CMD ["/bin/containerpilot" ; "node opt/app/lib/index.js"]
+CMD ["/bin/containerpilot"]
