@@ -10,7 +10,7 @@ consul:
   command: >
     /usr/local/bin/containerpilot
   env_file:
-    - _env
+    - .env
   environment:
     - CONSUL_DEV=1
 prometheus:
@@ -19,7 +19,7 @@ prometheus:
   ports:
     - "9090:9090"
   env_file:
-    - _env
+    - .env
   dns:
     - 127.0.0.1
 nats:
@@ -30,7 +30,7 @@ nats:
   links:
     - consul:consul
   env_file:
-    - _env
+    - .env
 redis:
   image: redis
   expose:
@@ -43,7 +43,7 @@ gateway:
   links:
     - redis:redis
   env_file:
-    - _env
+    - .env
   restart: always
 influxdb:
   image: autopilotpattern/influxdb:1.1.1
@@ -52,7 +52,7 @@ influxdb:
     - "8083:8083"
   restart: always
   env_file:
-    - _env
+    - .env
   environment:
     - ADMIN_USER=root
     - INFLUXDB_INIT_PWD=root123
@@ -64,7 +64,7 @@ influxdb:
 serializer:
   image: d0cker/serializer:6.5.0
   env_file:
-    - _env
+    - .env
   environment:
     - INFLUXDB_USER=root
     - INFLUXDB_PWD=root123
@@ -75,7 +75,7 @@ serializer:
 frontend:
   image: d0cker/frontend:6.2.0
   env_file:
-    - _env
+    - .env
   expose:
     - "10001"
   ports:
@@ -88,28 +88,28 @@ smartthings:
   ports:
     - "80:80"
   env_file:
-    - _env
+    - .env
   environment:
     - FAKE_MODE=true
   restart: always
 humidity:
   image: d0cker/sensor:4.2.0
   env_file:
-    - _env
+    - .env
   environment:
     - SENSOR_TYPE=humidity
   restart: always
 motion:
   image: d0cker/sensor:4.2.0
   env_file:
-    - _env
+    - .env
   environment:
     - SENSOR_TYPE=motion
   restart: always
 temperature:
   image: d0cker/sensor:4.2.0
   env_file:
-    - _env
+    - .env
   environment:
     - SENSOR_TYPE=temperature
   restart: always
