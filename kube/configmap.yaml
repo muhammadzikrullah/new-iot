@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: config-env
+  namespace: default
+data:
+  data.env: |
+    CONSUL= consul
+    CONSUL_AGENT= 1
+    NATS_USER= ruser
+    NATS_PASSWORD= password
+    ADMIN_USER= root

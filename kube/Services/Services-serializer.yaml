@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: serializer
+  namespace: default
+spec:
+  selector:
+    app: serializer
+  type: NodePort
+  ports:
+  - name: serializer
+    port: 9090
+    targetPort: 10000 
+    protocol: TCP

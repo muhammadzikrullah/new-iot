@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  serializer
+  namespace: default
+  labels:
+    app:  serializer
+spec:
+  selector:
+    matchLabels:
+      app: serializer
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  serializer
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name:  serializer
+        image:  d0cker/serializer:6.5.0
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        env:
+          - name: CONSUL
+            value: "consul"
+          - name: PORT
+            value: "10000"
+          - name: INFLUXDB_USER
+            value: "root"
+          - name: INFLUXDB_PWD
+            value: "root123"
+          - name: CONSUL_AGENT
+            value: "1"
+          - name: NATS_USER
+            value: "ruser"
+          - name: NATS_PASSWORD
+            value: "password"
+          - name: ADMIN_USER
+            value: "root"
+            
+        ports:
+        - containerPort:  10000
+          name:  serializer
+        volumeMounts:
+        - name: localtime
+          mountPath: /etc/localtime
+      volumes:
+        - name: localtime
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+      restartPolicy: Always
