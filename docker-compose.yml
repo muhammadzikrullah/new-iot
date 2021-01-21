@@ -13,7 +13,7 @@ services:
       /usr/local/bin/containerpilot
     environment:
       - CONSUL_DEV=1
-    network_mode: host
+    #change
   frontend:
     image: d0cker/frontend:6.2.0
     environment:
@@ -26,7 +26,6 @@ services:
       - 9090
     ports:
       - "10001:10001"
-    network_mode: host
   serializer:
     image: d0cker/serializer:6.5.0
     env_file:
@@ -41,7 +40,6 @@ services:
       - 10000
     ports:
       - "10000:10000"
-    network_mode: host
   prometheus:
     image: autopilotpattern/prometheus:1.7.1-r20
     restart: always
@@ -51,7 +49,6 @@ services:
       - .env
     dns:
       - 127.0.0.1
-    network_mode: host
   nats:
     image: autopilotpattern/nats:0.9.6-r1.0.0
     restart: always
@@ -59,7 +56,6 @@ services:
       - 8222
     env_file:
       - .env
-    network_mode: host
   redis:
     image: redis
     expose:
@@ -72,7 +68,6 @@ services:
     env_file:
       - .env
     restart: always
-    network_mode: host
   influxdb:
     image: autopilotpattern/influxdb:1.1.1
     ports:
@@ -91,7 +86,6 @@ services:
       - INFLUXDB_DATA_QUERY_LOG_ENABLED=false
       - INFLUXDB_HTTP_LOG_ENABLED=false
       - INFLUXDB_CONTINUOUS_QUERIES_LOG_ENABLED=false
-    network_mode: host
   smartthings:
     image: d0cker/smartthings:8.2.0
     labels:
@@ -104,7 +98,6 @@ services:
       - FAKE_MODE=true
       - PORT=80
     restart: always
-    network_mode: host
   humidity:
     image: d0cker/sensor:4.2.0
     env_file:
