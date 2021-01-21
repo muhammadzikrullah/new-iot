@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: serializer
+  name: serializer
+spec:
+  ports:
+  - name: "10000"
+    port: 10000
+    targetPort: 10000
+  - name: "9090"
+    port: 9090
+    targetPort: 9090
+  selector:
+    io.kompose.service: serializer
+status:
+  loadBalancer: {}

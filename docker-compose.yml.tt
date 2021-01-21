@@ -1,4 +1,4 @@
-version: "3"
+version: '2.1'
 services:
   consul:
     image: autopilotpattern/consul:0.7.3r39
@@ -18,8 +18,6 @@ services:
     environment:
       - CONSUL=consul
       - PORT=10001
-    labels:
-      kompose.service.type: nodeport
     expose:
       - 10001
       - 9090
@@ -59,7 +57,7 @@ services:
     image: redis
     expose:
       - 6379
-    restart: always
+    restart: always   
   gateway:
     image: d0cker/gateway:4.0.0
     ports:
@@ -73,8 +71,6 @@ services:
       - "8086:8086"
       - "8083:8083"
     restart: always
-    labels:
-      kompose.service.type: nodeport
     env_file:
       - .env
     environment:
@@ -120,4 +116,4 @@ services:
       - .env
     environment:
       - SENSOR_TYPE=temperature
-    restart: always
+    restart: always       

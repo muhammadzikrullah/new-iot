@@ -1,0 +1,14 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingressfrontend
+  namespace: default
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+                serviceName: frontend
+                servicePort: 10001
+    

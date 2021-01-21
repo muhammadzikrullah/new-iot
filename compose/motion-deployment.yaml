@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: motion
+  name: motion
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: motion
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: motion
+    spec:
+      containers:
+      - env:
+        - name: ADMIN_USER
+          valueFrom:
+            configMapKeyRef:
+              key: ADMIN_USER
+              name: env
+        - name: CONSUL
+          valueFrom:
+            configMapKeyRef:
+              key: CONSUL
+              name: env
+        - name: CONSUL_AGENT
+          valueFrom:
+            configMapKeyRef:
+              key: CONSUL_AGENT
+              name: env
+        - name: NATS_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: NATS_PASSWORD
+              name: env
+        - name: NATS_USER
+          valueFrom:
+            configMapKeyRef:
+              key: NATS_USER
+              name: env
+        - name: SENSOR_TYPE
+          value: motion
+        image: d0cker/sensor:4.2.0
+        imagePullPolicy: ""
+        name: motion
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

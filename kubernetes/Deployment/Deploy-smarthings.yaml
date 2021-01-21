@@ -47,6 +47,8 @@ spec:
           value: "consul"
         - name : FAKE_MODE
           value: "true"
+        - name: PORT
+          value: "80"
         ports:
         - containerPort:  80
           name:  smarthings

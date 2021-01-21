@@ -63,6 +63,7 @@ spec:
           value: "consul"
         ports:
         - containerPort:  8086
+        - containerPort: 8083
           name:  influxdb
         
       restartPolicy: Always

@@ -10,5 +10,5 @@ spec:
   ports:
   - name: influxdb
     port: 8083
-    targetPort: 8083
+    targetPort: 8086
     protocol: TCP

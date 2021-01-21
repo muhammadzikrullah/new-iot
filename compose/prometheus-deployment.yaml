@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: prometheus
+  name: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: prometheus
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: prometheus
+    spec:
+      containers:
+      - env:
+        - name: ADMIN_USER
+          valueFrom:
+            configMapKeyRef:
+              key: ADMIN_USER
+              name: env
+        - name: CONSUL
+          valueFrom:
+            configMapKeyRef:
+              key: CONSUL
+              name: env
+        - name: CONSUL_AGENT
+          valueFrom:
+            configMapKeyRef:
+              key: CONSUL_AGENT
+              name: env
+        - name: NATS_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: NATS_PASSWORD
+              name: env
+        - name: NATS_USER
+          valueFrom:
+            configMapKeyRef:
+              key: NATS_USER
+              name: env
+        image: autopilotpattern/prometheus:1.7.1-r20
+        imagePullPolicy: ""
+        name: prometheus
+        ports:
+        - containerPort: 9090
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
